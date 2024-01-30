@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "764491921135",
+    "firebase_url": "https://memowebapp-9f6e6-default-rtdb.firebaseio.com",
+    "project_id": "memowebapp-9f6e6",
+    "storage_bucket": "memowebapp-9f6e6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:764491921135:android:065ea29a0f7c510ee34d1a",
+        "android_client_info": {
+          "package_name": "com.example.test_proj"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBF_yHCQyY-q1mDj_NmZiRfuHVVBcnzD0Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
