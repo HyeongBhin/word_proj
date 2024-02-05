@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:test_proj/SheetSelection_Page.dart';
 
+import 'SheetSelection_Page.dart';
+import 'Selection_Page.dart';
 import 'ChapterSelection_Card.dart';
 import 'ChapterSelection_Quiz.dart';
 import 'review_page.dart';
-import 'Test_Page.dart';
 import 'Login_Page.dart';
 
 class MyApp extends StatelessWidget {
@@ -15,10 +17,11 @@ class MyApp extends StatelessWidget {
       routes: {
         '/word_login': (context) => LoginPage(),
         '/word_main': (context) => MainPage(),
+        '/sheet_select' : (context) => SheetSelectionPage(),
+        '/select_list' : (context) => SelectPage(),
         '/word_card': (context) => ChapterSelection_Card(),
         '/word_quiz': (context) => ChapterSelection_Quiz(),
         '/review_page': (context) => ReviewPage(),
-        '/test_page': (context) => TestPage(),
       },
     );
   }
@@ -36,15 +39,9 @@ class MainPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
-              child: Text('Word Cards'),
+              child: Text('Select Exam'),
               onPressed: () {
-                Navigator.pushNamed(context, '/word_card');
-              },
-            ),
-            ElevatedButton(
-              child: Text('Word Quiz'),
-              onPressed: () {
-                Navigator.pushNamed(context, '/word_quiz');
+                Navigator.pushNamed(context, '/sheet_select');
               },
             ),
             ElevatedButton(

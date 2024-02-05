@@ -1,6 +1,7 @@
 // word_card_page.dart
 import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'word_data.dart';
 import 'Word.dart';
@@ -12,12 +13,16 @@ class WordCardPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Provider를 통해 SheetIdProvider 인스턴스를 얻습니다.
+    final sheetIdProvider = Provider.of<SheetIdProvider>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Word Cards '),
+        title: Text('Word Cards $chapter'),
       ),
       body: FutureBuilder<Map<String, List<Word>>>(
-        future: WordData.loadDataFromSheets(chapter),
+        // loadDataFromSheets 함수를 올바르게 호출합니다.
+        future: WordData.loadDataFromSheets(sheetIdProvider, chapter),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import 'word_data.dart';
 import 'word_quiz.dart';
 
 class ChapterSelection_Quiz extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,7 +22,10 @@ class ChapterSelection_Quiz extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => QuizPage(Chapter: 'Chapter1'),
+                    builder: (context) => QuizPage(
+                      Chapter: 'Chapter1',
+                      sheetIdProvider: Provider.of<SheetIdProvider>(context, listen: false), // SheetIdProvider 인스턴스 전달
+                    ),
                   ),
                 );
               },
@@ -32,7 +38,10 @@ class ChapterSelection_Quiz extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => QuizPage(Chapter: 'Chapter2'),
+                    builder: (context) => QuizPage(
+                      Chapter: 'Chapter2',
+                      sheetIdProvider: Provider.of<SheetIdProvider>(context, listen: false), // SheetIdProvider 인스턴스 전달
+                    ),
                   ),
                 );
               },
@@ -45,7 +54,10 @@ class ChapterSelection_Quiz extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => QuizPage(Chapter: 'Chapter3'),
+                    builder: (context) => QuizPage(
+                      Chapter: 'Chapter3',
+                      sheetIdProvider: Provider.of<SheetIdProvider>(context, listen: false), // SheetIdProvider 인스턴스 전달
+                    ),
                   ),
                 );
               },
@@ -57,7 +69,10 @@ class ChapterSelection_Quiz extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => QuizPage(Chapter: 'Chapter4'),
+                    builder: (context) => QuizPage(
+                      Chapter: 'Chapter4',
+                      sheetIdProvider: Provider.of<SheetIdProvider>(context, listen: false), // SheetIdProvider 인스턴스 전달
+                    ),
                   ),
                 );
               },
@@ -69,7 +84,10 @@ class ChapterSelection_Quiz extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => QuizPage(Chapter: 'Chapter5'),
+                    builder: (context) => QuizPage(
+                      Chapter: 'Chapter5',
+                      sheetIdProvider: Provider.of<SheetIdProvider>(context, listen: false), // SheetIdProvider 인스턴스 전달
+                    ),
                   ),
                 );
               },
@@ -81,7 +99,10 @@ class ChapterSelection_Quiz extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => QuizPage(Chapter: 'AllWords'),
+                    builder: (context) => QuizPage(
+                      Chapter: 'AllWords',
+                      sheetIdProvider: Provider.of<SheetIdProvider>(context, listen: false), // SheetIdProvider 인스턴스 전달
+                    ),
                   ),
                 );
               },

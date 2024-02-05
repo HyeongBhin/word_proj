@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:provider/provider.dart';
 
 import 'word_data.dart';
 import 'Word.dart';
@@ -9,7 +10,9 @@ import 'Word.dart';
 class QuizPage extends StatefulWidget {
   final String Chapter;
 
-  QuizPage({required this.Chapter});
+  final SheetIdProvider sheetIdProvider;
+
+  QuizPage({required this.Chapter, required this.sheetIdProvider});
 
   @override
   _QuizPageState createState() => _QuizPageState();
@@ -34,8 +37,9 @@ class _QuizPageState extends State<QuizPage> {
 
   Future<List<Word>> _loadWords() async {
     try {
-      Map<String, List<Word>> data = await WordData.loadDataFromSheets(widget.Chapter);
-      List<Word> wordsList = data[widget.Chapter] ?? []; // 해당 시트에 대한 데이터 추출
+      // SheetIdProvider 인스턴스를 사용하여 sheetId를 전달합니다.
+      Map<String, List<Word>> data = await WordData.loadDataFromSheets(widget.sheetIdProvider, widget.Chapter);
+      List<Word> wordsList = data[widget.Chapter] ?? [];
       debugPrint('Words loaded successfully');
       return wordsList;
     } catch (e) {
@@ -43,6 +47,7 @@ class _QuizPageState extends State<QuizPage> {
       rethrow;
     }
   }
+
 
   void _generateQuiz() async {
     final List<Word>? wordsList = await _wordsFuture;

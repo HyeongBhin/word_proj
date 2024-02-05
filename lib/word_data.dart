@@ -1,12 +1,27 @@
-// word_data.dart
 import 'package:googleapis/sheets/v4.dart' as sheets;
 import 'package:googleapis_auth/auth_io.dart';
+import 'package:flutter/foundation.dart';
+
+import 'SheetSelection_Page.dart';
 import 'Word.dart';
+
+class SheetIdProvider with ChangeNotifier {
+  String? _sheetId;
+
+  String? get sheetId => _sheetId;
+
+  set sheetId(String? newSheetId) {
+    _sheetId = newSheetId;
+    notifyListeners(); // sheetId 값이 변경될 때 리스너에게 알림
+  }
+}
 
 class WordData {
   static const _scopes = [sheets.SheetsApi.spreadsheetsScope];
 
-  static Future<Map<String, List<Word>>> loadDataFromSheets(String sheet) async {
+  static Future<Map<String, List<Word>>> loadDataFromSheets(SheetIdProvider provider, String sheetname) async {
+    String? sheetId = provider.sheetId;
+
     var _credentials = ServiceAccountCredentials.fromJson({
       "type": "service_account",
       "project_id": "sheetgpt-408209",
@@ -29,119 +44,27 @@ class WordData {
     var api = sheets.SheetsApi(httpClient);
 
     try {
-      final spreadsheetId = '1bUxqmSra1z0KCeZObaVK0Y7rtTVx_hYxeZj2ecrVxgA';
+      // 시트의 데이터를 가져와서 Word 객체 리스트로 변환하는 함수
+      Future<List<Word>> loadSheetData(String sheetName, Function converter) async {
 
-      // 시트1의 데이터 가져오기
-      final rangeSheet1 = '시트1!A:B';
-      var responseSheet1 =
-      await api.spreadsheets.values.get(spreadsheetId, rangeSheet1);
-
-      // 시트2의 데이터 가져오기
-      final rangeSheet2 = '시트2!A:B';
-      var responseSheet2 =
-      await api.spreadsheets.values.get(spreadsheetId, rangeSheet2);
-
-      // 시트3의 데이터 가져오기
-      final rangeSheet3 = '시트3!A:B';
-      var responseSheet3 =
-      await api.spreadsheets.values.get(spreadsheetId, rangeSheet3);
-
-      // 시트4의 데이터 가져오기
-      final rangeSheet4 = '시트4!A:B';
-      var responseSheet4 =
-      await api.spreadsheets.values.get(spreadsheetId, rangeSheet4);
-
-      // 시트5의 데이터 가져오기
-      final rangeSheet5 = '시트5!A:B';
-      var responseSheet5 =
-      await api.spreadsheets.values.get(spreadsheetId, rangeSheet5);
-
-      List<Word> wordsSheet1 = [];
-      List<Word> wordsSheet2 = [];
-      List<Word> wordsSheet3 = [];
-      List<Word> wordsSheet4 = [];
-      List<Word> wordsSheet5 = [];
-
-      // 시트1 데이터를 Word_1 객체로 변환
-      if (responseSheet1.values != null && responseSheet1.values!.isNotEmpty) {
-        wordsSheet1 = responseSheet1.values!
-            .where((wordData) => wordData.length >= 2)
-            .map((wordData) {
-          final eword_1 = wordData[0];
-          final meaning_1 = wordData[1];
-          if (eword_1 is String && meaning_1 is String) {
-            return Word_1(eword_1: eword_1, meaning_1: meaning_1);
-          }
-          return null;
-        })
-            .whereType<Word_1>() // null이 아닌 Word_1 객체만 유지
-            .toList();
+        final range = '$sheetName!A:B';
+        var response = await api.spreadsheets.values.get(sheetId!, range);
+        if (response.values != null && response.values!.isNotEmpty) {
+          return response.values!
+              .where((wordData) => wordData.length >= 2)
+              .map((wordData) => converter(wordData))
+              .whereType<Word>()
+              .toList();
+        }
+        return [];
       }
 
-      // 시트2 데이터를 Word_2 객체로 변환
-      if (responseSheet2.values != null && responseSheet2.values!.isNotEmpty) {
-        wordsSheet2 = responseSheet2.values!
-            .where((wordData) => wordData.length >= 2)
-            .map((wordData) {
-          final eword_2 = wordData[0];
-          final meaning_2 = wordData[1];
-          if (eword_2 is String && meaning_2 is String) {
-            return Word_2(eword_2: eword_2, meaning_2: meaning_2);
-          }
-          return null;
-        })
-            .whereType<Word_2>() // null이 아닌 Word_2 객체만 유지
-            .toList();
-      }
-
-      // 시트3 데이터를 Word_3 객체로 변환
-      if (responseSheet3.values != null && responseSheet3.values!.isNotEmpty) {
-        wordsSheet3 = responseSheet3.values!
-            .where((wordData) => wordData.length >= 2)
-            .map((wordData) {
-          final eword_3 = wordData[0];
-          final meaning_3 = wordData[1];
-          if (eword_3 is String && meaning_3 is String) {
-            return Word_3(eword_3: eword_3, meaning_3: meaning_3);
-          }
-          return null;
-        })
-            .whereType<Word_3>() // null이 아닌 Word_3 객체만 유지
-            .toList();
-      }
-
-      // 시트2 데이터를 Word_4 객체로 변환
-      if (responseSheet4.values != null && responseSheet4.values!.isNotEmpty) {
-        wordsSheet4 = responseSheet4.values!
-            .where((wordData) => wordData.length >= 2)
-            .map((wordData) {
-          final eword_4 = wordData[0];
-          final meaning_4 = wordData[1];
-          if (eword_4 is String && meaning_4 is String) {
-            return Word_4(eword_4: eword_4, meaning_4: meaning_4);
-          }
-          return null;
-        })
-            .whereType<Word_4>() // null이 아닌 Word_4 객체만 유지
-            .toList();
-      }
-
-      // 시트5 데이터를 Word_5 객체로 변환
-      if (responseSheet5.values != null && responseSheet5.values!.isNotEmpty) {
-        wordsSheet5 = responseSheet5.values!
-            .where((wordData) => wordData.length >= 2)
-            .map((wordData) {
-          final eword_5 = wordData[0];
-          final meaning_5 = wordData[1];
-          if (eword_5 is String && meaning_5 is String) {
-            return Word_5(eword_5: eword_5, meaning_5: meaning_5);
-          }
-          return null;
-        })
-            .whereType<Word_5>() // null이 아닌 Word_5 객체만 유지
-            .toList();
-      }
-
+      // 각 시트의 데이터를 불러오고 Word 객체로 변환
+      var wordsSheet1 = await loadSheetData('시트1', (data) => Word_1(eword_1: data[0], meaning_1: data[1]));
+      var wordsSheet2 = await loadSheetData('시트2', (data) => Word_2(eword_2: data[0], meaning_2: data[1]));
+      var wordsSheet3 = await loadSheetData('시트3', (data) => Word_3(eword_3: data[0], meaning_3: data[1]));
+      var wordsSheet4 = await loadSheetData('시트4', (data) => Word_4(eword_4: data[0], meaning_4: data[1]));
+      var wordsSheet5 = await loadSheetData('시트5', (data) => Word_5(eword_5: data[0], meaning_5: data[1]));
 
       List<Word> allWords = [];
       allWords.addAll(wordsSheet1);
@@ -150,17 +73,15 @@ class WordData {
       allWords.addAll(wordsSheet4);
       allWords.addAll(wordsSheet5);
 
-
-      // 시트1과 시트2의 데이터를 각각 반환
+      // 시트1부터 시트5까지의 데이터와 모든 단어를 반환
       return {
-        'Chapter1': wordsSheet1.cast<Word>(),
-        'Chapter2': wordsSheet2.cast<Word>(),
-        'Chapter3': wordsSheet3.cast<Word>(),
-        'Chapter4': wordsSheet4.cast<Word>(),
-        'Chapter5': wordsSheet5.cast<Word>(),
-        'AllWords': allWords.cast<Word>(),
+        'Chapter1': wordsSheet1,
+        'Chapter2': wordsSheet2,
+        'Chapter3': wordsSheet3,
+        'Chapter4': wordsSheet4,
+        'Chapter5': wordsSheet5,
+        'AllWords': allWords,
       };
-
     } catch (e) {
       // 예외 처리
       print('Sheets에서 데이터를 불러오는 중 오류 발생: $e');
