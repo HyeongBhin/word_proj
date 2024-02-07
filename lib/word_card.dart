@@ -3,6 +3,7 @@ import 'package:flip_card/flip_card.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'FlipCardView.dart';
 import 'word_data.dart';
 import 'Word.dart';
 
@@ -18,7 +19,7 @@ class WordCardPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Word Cards $chapter'),
+        title: Text('영어 단어장 $chapter'),
       ),
       body: FutureBuilder<Map<String, List<Word>>>(
         // loadDataFromSheets 함수를 올바르게 호출합니다.
@@ -54,6 +55,16 @@ class WordGridView<T> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // 화면 크기에 따라 crossAxisCount 값을 동적으로 결정합니다.
+    int crossAxisCount = 2; // 기본값
+    double screenWidth = MediaQuery.of(context).size.width;
+    if (screenWidth > 600) { // 태블릿 크기
+      crossAxisCount = 3;
+    }
+    if (screenWidth > 900) { // PC 크기
+      crossAxisCount = 5;
+    }
+
     return Column(
       children: [
         Padding(
@@ -64,20 +75,17 @@ class WordGridView<T> extends StatelessWidget {
         Expanded(
           child: GridView.builder(
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4, // 한 줄에 4개의 카드가 들어가도록 설정
-              childAspectRatio: 1 / 1.1,
+              crossAxisCount: crossAxisCount,
+              childAspectRatio: 1 / 0.8,
             ),
             itemCount: words.length,
             itemBuilder: (context, index) {
               final word = words[index];
-              return FlipCard(
-                key: ValueKey(word),
-                front: Card(
-                  child: Center(child: Text(getEword(word))),
-                ),
-                back: Card(
-                  child: Center(child: Text(getMeaning(word))),
-                ),
+              // FlipCard 대신 FlipCardView를 사용합니다.
+              return FlipCardView(
+                word: word,
+                frontText: getEword(word), // 단어의 앞면 텍스트
+                backText: getMeaning(word), // 단어의 뒷면 텍스트
               );
             },
           ),

@@ -53,14 +53,17 @@ class _QuizPageState extends State<QuizPage> {
     final List<Word>? wordsList = await _wordsFuture;
     if (wordsList != null) {
       wordsList.shuffle();
-      _quizWords = wordsList.take(20).toList(); // 문제 갯수 선택하기
+      // 리스트의 길이가 50 이하일 경우 전체 리스트를 사용하고, 그렇지 않으면 처음 50개의 항목만 사용
+      int quizSize = wordsList.length <= 50 ? wordsList.length : 50;
+      _quizWords = wordsList.take(quizSize).toList();
       _options = {};
       for (var word in _quizWords!) {
         _correctAnswers[word.eword] = word.meaning;
         List<String> allMeanings = wordsList.map((e) => e.meaning).toList();
         allMeanings.shuffle();
         allMeanings.removeWhere((meaning) => meaning == word.meaning);
-        _options![word.eword] = allMeanings.take(4).toList()..add(word.meaning); //보기 갯수 선택하기
+        // 보기를 생성하되, 정답을 포함하여 총 5개의 보기를 만듭니다. 정답이 이미 포함되어 있으므로 4개를 더 가져옵니다.
+        _options![word.eword] = allMeanings.take(4).toList()..add(word.meaning);
         _options![word.eword]!.shuffle();
       }
       if (mounted) {
@@ -73,7 +76,7 @@ class _QuizPageState extends State<QuizPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Quiz'),
+        title: Text('단어 시험'),
       ),
       body: FutureBuilder<List<Word>>(
         future: _wordsFuture,

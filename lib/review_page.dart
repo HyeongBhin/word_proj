@@ -79,7 +79,7 @@ class _ReviewPageState extends State<ReviewPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Review Quiz Results'),
+        title: Text('퀴즈 결과 모음'),
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: _getQuizResults(),
@@ -107,8 +107,8 @@ class _ReviewPageState extends State<ReviewPage> {
 
               return Card(
                 child: ListTile(
-                  title: Text('Quiz on ${date.toString()} - $chapter'),
-                  subtitle: Text('Incorrect Answers: ${incorrectWords.length}'),
+                  title: Text('퀴즈를 친 날짜 : ${date.toString()} - $chapter'),
+                  subtitle: Text('틀린 문제 갯수 : ${incorrectWords.length}'),
                   onTap: () {
                     showDialog(
                       context: context,

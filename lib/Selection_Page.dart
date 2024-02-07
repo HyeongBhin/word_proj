@@ -14,13 +14,14 @@ class SelectPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             ElevatedButton(
-              child: Text('Word Cards'),
+              child: Text('영어 단어장'),
               onPressed: () {
                 Navigator.pushNamed(context, '/word_card');
               },
             ),
+            SizedBox(height: 20),
             ElevatedButton(
-              child: Text('Word Quiz'),
+              child: Text('단어 시험'),
               onPressed: () {
                 Navigator.pushNamed(context, '/word_quiz');
               },

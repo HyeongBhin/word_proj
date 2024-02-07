@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'SheetSelection_Page.dart';
 import 'Selection_Page.dart';
@@ -28,7 +29,25 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => SheetIdProvider()),
       ],
       child: MaterialApp(
-        home: LoginPage(),
+        // home: LoginPage(), // 이전 코드에서는 LoginPage를 직접 지정했습니다.
+        home: StreamBuilder<User?>(
+          stream: FirebaseAuth.instance.authStateChanges(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.active) {
+              // 스트림이 활성 상태이고, 데이터(snapshot)가 있으면 사용자가 로그인한 것입니다.
+              User? user = snapshot.data;
+              if (user == null) {
+                // 사용자 데이터가 없으면 로그인 페이지로 이동합니다.
+                return LoginPage();
+              } else {
+                // 사용자 데이터가 있으면 메인 페이지로 이동합니다.
+                return MainPage();
+              }
+            }
+            // 스트림이 아직 활성 상태가 아니면 로딩 인디케이터를 보여줍니다.
+            return Center(child: CircularProgressIndicator());
+          },
+        ),
         routes: {
           '/word_login': (context) => LoginPage(),
           '/word_main': (context) => MainPage(),

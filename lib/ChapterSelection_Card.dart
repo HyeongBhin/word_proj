@@ -7,7 +7,7 @@ class ChapterSelection_Card extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('문제 번호를 고르세요'),
+        title: Text('챕터를 고르세요'),
       ),
       body: Center(
         child: Column(
