@@ -44,42 +44,37 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyApDkS_gQ9PU1wDcuf-jLsaM8qErJB5FlA',
-    appId: '1:764491921135:web:c5bcde335acefb5ce34d1a',
-    messagingSenderId: '764491921135',
-    projectId: 'memowebapp-9f6e6',
-    authDomain: 'memowebapp-9f6e6.firebaseapp.com',
-    databaseURL: 'https://memowebapp-9f6e6-default-rtdb.firebaseio.com',
-    storageBucket: 'memowebapp-9f6e6.appspot.com',
-    measurementId: 'G-Y0M9E2R91D',
+    apiKey: 'AIzaSyD069aAMgvQPlUDdJF7llK13z_vw2rQlbc',
+    appId: '1:429802887971:web:b5624dc524d1740d208a96',
+    messagingSenderId: '429802887971',
+    projectId: 'word-clear',
+    authDomain: 'word-clear.firebaseapp.com',
+    storageBucket: 'word-clear.appspot.com',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBF_yHCQyY-q1mDj_NmZiRfuHVVBcnzD0Q',
-    appId: '1:764491921135:android:065ea29a0f7c510ee34d1a',
-    messagingSenderId: '764491921135',
-    projectId: 'memowebapp-9f6e6',
-    databaseURL: 'https://memowebapp-9f6e6-default-rtdb.firebaseio.com',
-    storageBucket: 'memowebapp-9f6e6.appspot.com',
+    apiKey: 'AIzaSyBhzSNPfsoKjFFyA_H4oxaUFoN-OJAfRJY',
+    appId: '1:429802887971:android:525f0379c071608f208a96',
+    messagingSenderId: '429802887971',
+    projectId: 'word-clear',
+    storageBucket: 'word-clear.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyD3h8Bp9ourKMOE1nujCypaXon5n-A3WCA',
-    appId: '1:764491921135:ios:ce9926c26974c6bae34d1a',
-    messagingSenderId: '764491921135',
-    projectId: 'memowebapp-9f6e6',
-    databaseURL: 'https://memowebapp-9f6e6-default-rtdb.firebaseio.com',
-    storageBucket: 'memowebapp-9f6e6.appspot.com',
+    apiKey: 'AIzaSyD0AzvnnT1-cRx3lN7Vl59Hf2G-LJ4LBjw',
+    appId: '1:429802887971:ios:cc84d79fa2f04523208a96',
+    messagingSenderId: '429802887971',
+    projectId: 'word-clear',
+    storageBucket: 'word-clear.appspot.com',
     iosBundleId: 'com.example.testProj',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyD3h8Bp9ourKMOE1nujCypaXon5n-A3WCA',
-    appId: '1:764491921135:ios:0f325df180bbd43de34d1a',
-    messagingSenderId: '764491921135',
-    projectId: 'memowebapp-9f6e6',
-    databaseURL: 'https://memowebapp-9f6e6-default-rtdb.firebaseio.com',
-    storageBucket: 'memowebapp-9f6e6.appspot.com',
+    apiKey: 'AIzaSyD0AzvnnT1-cRx3lN7Vl59Hf2G-LJ4LBjw',
+    appId: '1:429802887971:ios:89f91166a9cdc48f208a96',
+    messagingSenderId: '429802887971',
+    projectId: 'word-clear',
+    storageBucket: 'word-clear.appspot.com',
     iosBundleId: 'com.example.testProj.RunnerTests',
   );
 }

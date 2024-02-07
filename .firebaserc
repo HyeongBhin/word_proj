@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "memowebapp-9f6e6"
-  }
+    "word-clear": "word-clear",
+    "default": "word-clear"
+  },
+  "targets": {},
+  "etags": {}
 }
