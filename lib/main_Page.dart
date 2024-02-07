@@ -9,7 +9,7 @@ class MainPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: Text('Word-Clear'),
         actions: <Widget>[
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
